@@ -1,0 +1,27 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    meta.helm.sh/release-namespace: monitoring
+  labels:
+    app: kube-prometheus-stack-mariadb-apm
+    release: kube-prometheus-stack
+    app.kubernetes.io/instance: prometheus-stack
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 65.2.0
+    chart: kube-prometheus-stack-65.2.0
+    heritage: Helm
+  name: mariadb-apm
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: mariadb-exporter-apm
+  endpoints:
+  - port: http-metrics
+    path: /metrics
+    scheme: http
+  namespaceSelector:
+    matchNames:
+    - prod

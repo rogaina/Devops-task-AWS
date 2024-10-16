@@ -1,0 +1,28 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: kube-prometheus-stack-redis-exporter-bug
+    app.kubernetes.io/instance: prometheus-stack
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 65.2.0
+    chart: kube-prometheus-stack-65.2.0
+    heritage: Helm
+#    prometheus: k8s
+    release: prometheus-stack
+  name: redis-bug
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: bug
+      redis_setup_type: standalone
+      role: standalone
+  endpoints:
+  - port: redis-exporter
+    path: /metrics
+    scheme: http
+  namespaceSelector:
+    matchNames:
+    - prod

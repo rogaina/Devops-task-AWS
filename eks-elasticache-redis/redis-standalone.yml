@@ -1,0 +1,68 @@
+---
+apiVersion: redis.redis.opstreelabs.in/v1beta1
+kind: Redis
+metadata:
+  name: redis-standalone-apm
+  labels:
+    app: apm
+spec:
+  tolerations:
+  - effect: NoSchedule
+    key: apm
+    value: "true"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - ip-10-0-2-22.us-east-2.compute.internal
+
+  redisExporter:
+    enabled: true
+    image: quay.io/opstree/redis-exporter:v1.44.0
+    imagePullPolicy: IfNotPresent
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 100m
+        memory: 128Mi
+  kubernetesConfig:
+    image: quay.io/opstree/redis:v7.0.5
+    imagePullPolicy: IfNotPresent
+    resources:
+    redisSecret:
+      name: redis-secret-apm
+      key: password
+  securityContext:
+    runAsUser: 1000
+    fsGroup: 1000
+  storage:
+    volumeClaimTemplate:
+        spec:
+          storageClassName: gp2
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-apm
+  labels:
+    name: redis-standalone-apm
+    app: apm
+spec:
+  selector:
+    app: redis-standalone-apm
+  type: ClusterIP
+  ports:
+    - port: 6379
+      protocol: TCP
+      name: redis

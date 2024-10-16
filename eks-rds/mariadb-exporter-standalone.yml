@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mariadb-exporter-apm
+spec:
+  serviceName: mariadb-exporter-apm
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb-exporter-apm
+  template:
+    metadata:
+      labels:
+        app: mariadb-exporter-apm
+    spec:
+      containers:
+      - name: mariadb-exporter
+        image: prom/mysqld-exporter:v0.12.1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http-metrics
+          containerPort: 9104
+          protocol: TCP
+        env:
+        - name: DATA_SOURCE_NAME
+          value: "apmrdsuser:apmrdspassword@(mysql-service.prod.svc.cluster.local:3306)/"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-exporter-apm
+  labels:
+    app: mariadb-exporter-apm
+spec:
+  type: ClusterIP
+  ports:
+  - port: 9104
+    protocol: TCP
+    targetPort: 9104
+    name: http-metrics
+  selector:
+    app: mariadb-exporter-apm

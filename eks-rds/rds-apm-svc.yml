@@ -1,0 +1,12 @@
+# rds-service.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: apm-service
+  name: apm-rds-service
+spec:
+  externalName: mariadb-apm.c7q22wgo65yd.us-east-1.rds.amazonaws.com
+  selector:
+    app: apm-service
+  type: ExternalName

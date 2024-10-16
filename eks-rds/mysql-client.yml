@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-client
+spec:
+  containers:
+  - name: mysql-client
+    image: mysql:8.0  # You can also use mysql:5.7 or mariadb image
+    stdin: true
+    tty: true
+    env:
+    - name: MYSQL_HOST
+      value: "mariadb-apm.c7q22wgo65yd.us-east-1.rds.amazonaws.com"  # Replace with your RDS endpoint
+    - name: MYSQL_PORT
+      value: "3306"  # Default MySQL port
+    - name: MYSQL_USER
+      value: "apmrdsuser"  # Replace with your RDS master username
+    - name: MYSQL_PASSWORD
+      value: "apmrdspassword"  # Replace with your RDS master password
+    command: ["sleep"]
+    args: ["infinity"]
+

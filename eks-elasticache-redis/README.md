@@ -9,7 +9,7 @@
 ``` bash
 kubectl edit deployment redis-operator -n redis-operator
 ```
-![redis operator](./eks-elasticache-redis/redis-operator.png)
+![redis operator](./redis-operator.png)
 
 3. Taint the node where Redis and the exporter will run (example node: ip-10-0-2-22.us-east-2.compute.internal):
 

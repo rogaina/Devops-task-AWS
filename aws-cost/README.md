@@ -50,3 +50,12 @@ reading logs and/or metrics of various components.
 - I tried to do lamda function to that queries an `APM` RDS database to gather query counts by user (e.g., different users representing different products) and stores the results in a DynamoDB table and Set up a trigger for in cloud watch by creating a Rule and select the created Lambda function as target. This allows Lambda to run at regular intervals to automatically query RDS and store the results in DynamoDB.
 
 - there are screenshots attached of my trial 
+
+ ![AWS cost1](./lamda1.png)
+
+ ![AWS cost2](./lamda2.png)
+
+ ![AWS cost3](./cloud watch rule.png)
+  
+ ![AWS cost4](./lamda3.png)
+ 

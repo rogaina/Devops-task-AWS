@@ -31,17 +31,17 @@ kubectl create secret generic redis-secret-apm -n prod --from-literal=password=a
 ``` bash
 kubectl apply -f redis-standalone-apm.yml -n prod
 ```
-![redis pods](./eks-elasticache-redis/redis-pods.png)
-![redis resource](./eks-elasticache-redis/redis-resources.png)
+![redis pods](./redis-pods.png)
+![redis resource](./redis-resources.png)
 
 7. Apply the ServiceMonitor to scrape metrics from the Redis exporter in Prometheus by applying redis-standalone-apm-service-monitor.yml:
  ``` bash
 kubectl apply -f redis-standalone-apm-service-monitor.yml -n monitoring
 ```
-![redis Architecture1](./eks-elasticache-redis/redis-metrics1.png)
-![redis Architecture2](./eks-elasticache-redis/redis-metrics2.png)
+![redis Architecture1](./redis-metrics1.png)
+![redis Architecture2](./redis-metrics2.png)
 
 8. Repeat the previous steps for bug, crash, and survey systems, applying the taints, tolerations, node affinity, and resource limits accordingly.
 
 9. Or create elasticache redis instances by terraform code in main.tf file then create vpc peer connection as I did in rds instances 
-![redis instance](./eks-elasticache-redis/redis-instance.png)
+![redis instance](./redis-instance.png)

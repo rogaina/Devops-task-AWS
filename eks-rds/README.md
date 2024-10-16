@@ -3,7 +3,7 @@
 
 I create 5 RDS mariadb instances with tag product: `/apm`,`/bugs`,`/survey`,`/crashes` and `core` used for cost calculations
 
-![RDS Architecture](./eks-rds/rds.png)
+![RDS Architecture](./rds.png)
 
 
 ## Accessing Amazon RDS From AWS EKS
@@ -16,7 +16,7 @@ I create 5 RDS mariadb instances with tag product: `/apm`,`/bugs`,`/survey`,`/cr
 -  create a **VPC Peering Connection** to facilitate communication between the resources in the two VPCs. According to the documentation
 
 
-![VPC Architecture](./eks-rds/vpc.png)
+![VPC Architecture](./vpc.png)
 
 
 - Then Update the RDS VPC's route table by the following command:
@@ -32,6 +32,6 @@ I create 5 RDS mariadb instances with tag product: `/apm`,`/bugs`,`/survey`,`/cr
 
    kubectl apply -f service-monitor-mariadb.yml -n monitoring
 
-![rds Architecture](./eks-rds/metrics1.png)
+![rds Architecture](./metrics1.png)
 
-![rds Architecture](./eks-rds/metrics2.png)
+![rds Architecture](./metrics2.png)

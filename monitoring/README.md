@@ -14,13 +14,13 @@ Follow the steps below to install Prometheus and Grafana in your EKS cluster:
    ```bash
    kubectl edit prometheus prometheus-stack-kube-prom-prometheus -n monitoring
 
-![prometheus-resources](./monitoring/prometheus-dep.png)
+![prometheus-resources](./prometheus-dep.png)
 
 4. **Edit Grafana Deployment**:
    ```bash
    kubectl edit deployment prometheus-stack-grafana -n monitoring
 
-![grafana-resource](./monitoring/grafana-resource.png)
+![grafana-resource](./grafana-resource.png)
 
 5. **Update Admin Login Password**:
    ```bash

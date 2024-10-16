@@ -55,7 +55,7 @@ reading logs and/or metrics of various components.
 
  ![AWS cost2](./lamda2.png)
 
- ![AWS cost3](./cloud watch rule.png)
+ ![AWS cost3](./cloud-watch-rule.png)
   
  ![AWS cost4](./lamda3.png)
  
